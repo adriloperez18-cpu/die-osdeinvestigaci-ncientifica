@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Adrián López Pérez">
+<meta name="description" content="Blog académico sobre diseños de investigación cuantitativa, cualitativa y mixta. Autor: Adrián López Pérez, 2026.">
+<title>InvestigaLab · Blog de Diseños de Investigación</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   ROOT & RESET
+═══════════════════════════════════════════ */
+:root{
+  --navy:#0b2e40;--navy2:#134a65;--navy3:#1a6080;
+  --gold:#c9a227;--gold2:#f0d060;--gold3:#fae89a;
+  --teal:#0e7b6b;--teal2:#13a891;
+  --rust:#8c3515;--rust2:#c44d20;
+  --paper:#f7f3eb;--paper2:#ede8dc;--paper3:#e2dbd0;
+  --white:#ffffff;--ink:#0d1f2d;--slate:#2d4a5a;--muted:#6a8090;
+  --ff-serif:'Cormorant Garamond',Georgia,serif;
+  --ff-sans:'DM Sans',Helvetica,sans-serif;
+  --ff-mono:'DM Mono',Courier,monospace;
+  --radius:8px;--shadow:0 4px 24px rgba(11,46,64,0.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--ff-sans);background:var(--paper);color:var(--ink);line-height:1.6;font-size:15px}
+
+/* ═══════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════ */
+nav{position:sticky;top:0;z-index:100;background:var(--navy);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:52px;box-shadow:0 2px 12px rgba(0,0,0,0.25)}
+.nav-logo{font-family:var(--ff-serif);font-size:20px;font-weight:700;color:var(--gold2);letter-spacing:-.01em}
+.nav-logo span{color:rgba(255,255,255,0.5);font-weight:400}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--gold2)}
+.nav-tag{font-size:10px;background:var(--gold);color:var(--navy);padding:2px 8px;border-radius:20px;font-weight:700;letter-spacing:.04em}
+
+/* ═══════════════════════════════════════════
+   HERO
+═══════════════════════════════════════════ */
+.hero{background:var(--navy);min-height:82vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:80px 32px 60px}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 75% 40%,rgba(201,162,39,0.14) 0%,transparent 55%),radial-gradient(ellipse at 15% 70%,rgba(14,123,107,0.12) 0%,transparent 45%)}
+.hero-deco{position:absolute;top:-60px;right:-40px;width:380px;height:380px;border-radius:50%;border:1px solid rgba(201,162,39,0.08)}
+.hero-deco2{position:absolute;bottom:-80px;left:30%;width:220px;height:220px;border-radius:50%;border:.5px solid rgba(201,162,39,0.06)}
+.hero-content{position:relative;z-index:1;max-width:740px;margin:0 auto;text-align:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;border:.5px solid rgba(201,162,39,0.35);padding:5px 14px;border-radius:20px;font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--gold2);margin-bottom:24px}
+.hero-title{font-family:var(--ff-serif);font-size:clamp(32px,5.5vw,56px);font-weight:700;color:var(--white);line-height:1.1;margin-bottom:12px}
+.hero-title em{color:var(--gold2);font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.75;max-width:540px;margin:0 auto 36px}
+.hero-meta{display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.hero-chip{display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,0.4);font-weight:500}
+.hero-dot{width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:.1em;text-transform:uppercase;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* ═══════════════════════════════════════════
+   SECTION UTILITIES
+═══════════════════════════════════════════ */
+.container{max-width:900px;margin:0 auto;padding:0 24px}
+.section{padding:64px 0}
+.section-alt{background:var(--paper2)}
+.section-dark{background:var(--navy)}
+.sec-eyebrow{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.sec-title{font-family:var(--ff-serif);font-size:clamp(22px,3.5vw,34px);font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:14px}
+.sec-title-white{color:var(--white)}
+.sec-lead{font-size:15px;color:var(--muted);line-height:1.75;max-width:640px}
+.sec-lead-white{color:rgba(255,255,255,0.55)}
+.divider{height:.5px;background:rgba(11,46,64,0.1);margin:20px 0}
+
+/* ═══════════════════════════════════════════
+   INTRO CARDS (concept overview)
+═══════════════════════════════════════════ */
+.intro-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:36px}
+.intro-card{background:var(--white);border-radius:var(--radius);padding:22px;border:.5px solid rgba(11,46,64,0.08);box-shadow:var(--shadow);position:relative;overflow:hidden}
+.intro-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+.ic-navy::before{background:var(--navy)}
+.ic-gold::before{background:var(--gold)}
+.ic-teal::before{background:var(--teal)}
+.ic-num{font-family:var(--ff-serif);font-size:40px;font-weight:700;color:rgba(11,46,64,0.06);position:absolute;top:8px;right:12px;line-height:1}
+.ic-icon{font-size:22px;margin-bottom:10px}
+.ic-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.ic-desc{font-size:12.5px;color:var(--muted);line-height:1.6}
+
+/* ═══════════════════════════════════════════
+   DESIGN TYPES — QUANTITATIVE
+═══════════════════════════════════════════ */
+.quant-header{background:linear-gradient(135deg,#7a5200,#5a3800);border-radius:var(--radius);padding:28px 30px;margin-bottom:20px;position:relative;overflow:hidden}
+.quant-header::after{content:'Q';position:absolute;right:20px;top:10px;font-family:var(--ff-serif);font-size:80px;font-weight:700;color:rgba(255,255,255,0.06);line-height:1}
+.quant-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:6px}
+.quant-title{font-family:var(--ff-serif);font-size:22px;font-weight:700;color:var(--gold2);margin-bottom:8px}
+.quant-desc{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.7}
+
+.design-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.design-card{background:var(--white);border-radius:var(--radius);padding:18px 20px;border:.5px solid rgba(11,46,64,0.08);box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+.dc-badge{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;margin-bottom:10px;text-transform:uppercase;letter-spacing:.06em}
+.badge-q{background:#fae8c8;color:#7a5200}
+.badge-c{background:#c8e8e4;color:#0a4a40}
+.badge-j{background:#c8d8e8;color:#0a2840}
+.badge-m{background:#e8c8c8;color:#5a1010}
+.dc-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.dc-def{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:8px}
+.dc-example-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:4px}
+.dc-example{font-size:12px;color:var(--slate);line-height:1.55;font-style:italic;border-left:2px solid var(--gold);padding-left:10px}
+
+/* ═══════════════════════════════════════════
+   ARTICLES / REFERENCES
+═══════════════════════════════════════════ */
+.article-card{background:var(--white);border-radius:var(--radius);padding:20px 22px;border:.5px solid rgba(11,46,64,0.08);box-shadow:var(--shadow);margin-bottom:14px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.art-year{background:var(--navy);color:var(--gold2);font-family:var(--ff-mono);font-size:11px;font-weight:500;padding:4px 10px;border-radius:4px;white-space:nowrap;text-align:center}
+.art-type{display:inline-block;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em}
+.at-q{background:#fae8c8;color:#7a5200}
+.at-c{background:#c8e8e4;color:#0a4a40}
+.at-m{background:#ddd8f0;color:#2a1060}
+.art-title{font-family:var(--ff-serif);font-size:15px;font-weight:600;color:var(--ink);line-height:1.35;margin-bottom:4px}
+.art-authors{font-size:11.5px;color:var(--muted);margin-bottom:6px}
+.art-abstract{font-size:12px;color:var(--slate);line-height:1.6}
+.art-db{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:10px;font-weight:600;color:var(--teal);letter-spacing:.05em;text-transform:uppercase}
+.art-db::before{content:'📚';font-size:10px}
+
+/* ═══════════════════════════════════════════
+   INSTRUMENTS SECTION
+═══════════════════════════════════════════ */
+.inst-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px}
+.inst-card{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.inst-head{padding:16px 20px}
+.inst-head-q{background:linear-gradient(135deg,#7a5200,#5a3800)}
+.inst-head-c{background:linear-gradient(135deg,#0a4a40,#062e28)}
+.inst-head-label{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:4px}
+.inst-head-title{font-family:var(--ff-serif);font-size:16px;font-weight:700;color:var(--gold2)}
+.inst-head-c .inst-head-title{color:#7fd4d0}
+.inst-body{background:var(--white);padding:16px 20px}
+.inst-item{display:flex;gap:12px;margin-bottom:12px;align-items:flex-start}
+.inst-item:last-child{margin-bottom:0}
+.inst-icon{font-size:16px;flex-shrink:0;margin-top:2px}
+.inst-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:3px}
+.inst-desc{font-size:11.5px;color:var(--muted);line-height:1.5}
+.inst-example{font-size:11px;color:var(--teal);font-style:italic;margin-top:3px}
+
+/* ═══════════════════════════════════════════
+   COMPARISON TABLE
+═══════════════════════════════════════════ */
+.cmp-wrap{background:var(--white);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);margin-top:28px}
+.cmp-head{display:grid;grid-template-columns:130px 1fr 1fr}
+.ch-asp{background:var(--navy);padding:12px 16px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,0.45)}
+.ch-q{background:#7a5200;padding:12px 16px;font-size:11px;font-weight:700;color:var(--gold2);display:flex;align-items:center;gap:6px}
+.ch-c{background:#0a4a40;padding:12px 16px;font-size:11px;font-weight:700;color:#7fd4d0;display:flex;align-items:center;gap:6px}
+.cmp-row{display:grid;grid-template-columns:130px 1fr 1fr;border-top:.5px solid rgba(11,46,64,0.07)}
+.cmp-row:nth-child(even){background:#fafaf7}
+.c-asp{padding:10px 16px;font-size:11.5px;font-weight:600;color:var(--muted);background:rgba(11,46,64,0.02)}
+.c-q{padding:10px 16px;font-size:12px;color:var(--slate);border-left:2px solid rgba(201,162,39,0.3)}
+.c-c{padding:10px 16px;font-size:12px;color:var(--slate);border-left:2px solid rgba(14,123,107,0.3)}
+
+/* ═══════════════════════════════════════════
+   QUALITATIVE HEADER
+═══════════════════════════════════════════ */
+.qual-header{background:linear-gradient(135deg,#0a4a40,#062e28);border-radius:var(--radius);padding:28px 30px;margin-bottom:20px;position:relative;overflow:hidden}
+.qual-header::after{content:'C';position:absolute;right:20px;top:10px;font-family:var(--ff-serif);font-size:80px;font-weight:700;color:rgba(255,255,255,0.06);line-height:1}
+.qual-title{font-family:var(--ff-serif);font-size:22px;font-weight:700;color:#7fd4d0;margin-bottom:8px}
+.qual-desc{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.7}
+
+/* ═══════════════════════════════════════════
+   TIMELINE
+═══════════════════════════════════════════ */
+.timeline{position:relative;padding-left:30px;margin-top:28px}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:1.5px;background:rgba(11,46,64,0.12)}
+.tl-item{position:relative;margin-bottom:22px}
+.tl-dot{position:absolute;left:-26px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid var(--paper)}
+.tl-phase{font-size:9.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.tl-title{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.tl-desc{font-size:12.5px;color:var(--muted);line-height:1.55}
+
+/* ═══════════════════════════════════════════
+   CALLOUT / QUOTE
+═══════════════════════════════════════════ */
+.callout{background:var(--navy);border-radius:var(--radius);padding:28px 32px;margin:28px 0;position:relative;overflow:hidden}
+.callout::before{content:'"';font-family:var(--ff-serif);font-size:100px;color:rgba(201,162,39,0.1);position:absolute;top:-10px;left:16px;line-height:1}
+.callout-text{font-family:var(--ff-serif);font-size:17px;font-style:italic;color:rgba(255,255,255,0.88);line-height:1.65;position:relative;z-index:1}
+.callout-text strong{color:var(--gold2);font-style:normal}
+.callout-source{font-size:11px;color:rgba(255,255,255,0.4);margin-top:12px;font-weight:500;letter-spacing:.05em}
+
+/* ═══════════════════════════════════════════
+   MIXED METHODS
+═══════════════════════════════════════════ */
+.mixed-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:24px}
+.mixed-card{background:var(--white);border-radius:var(--radius);padding:18px;border:.5px solid rgba(11,46,64,0.08);box-shadow:0 2px 8px rgba(0,0,0,0.05);text-align:center}
+.mc-icon{font-size:24px;margin-bottom:10px}
+.mc-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.mc-desc{font-size:11.5px;color:var(--muted);line-height:1.55}
+.mc-tag{display:inline-block;margin-top:8px;font-size:9px;font-weight:700;padding:2px 8px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em;background:#e0daf0;color:#3a1070}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer{background:var(--ink);padding:48px 32px 32px;text-align:center}
+.footer-logo{font-family:var(--ff-serif);font-size:24px;font-weight:700;color:var(--gold2);margin-bottom:10px}
+.footer-sub{font-size:12px;color:rgba(255,255,255,0.35);margin-bottom:24px;line-height:1.6}
+.footer-author{display:inline-block;border:.5px solid rgba(201,162,39,0.35);padding:8px 20px;border-radius:20px;font-size:11px;color:var(--gold2);font-weight:600;letter-spacing:.08em;margin-bottom:24px}
+.footer-refs{text-align:left;max-width:700px;margin:0 auto;border-top:.5px solid rgba(255,255,255,0.08);padding-top:24px}
+.fr-title{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:12px}
+.fr-item{font-size:11px;color:rgba(255,255,255,0.35);line-height:1.65;margin-bottom:6px;padding-left:14px;text-indent:-14px}
+.fr-item strong{color:rgba(255,255,255,0.55);font-weight:500}
+.footer-copy{font-size:10px;color:rgba(255,255,255,0.2);margin-top:20px;letter-spacing:.05em}
+
+/* ═══════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.animate{opacity:0;animation:fadeUp .6s ease forwards}
+.d1{animation-delay:.1s}.d2{animation-delay:.2s}.d3{animation-delay:.3s}.d4{animation-delay:.4s}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media(max-width:680px){
+  .intro-grid,.design-grid,.inst-grid,.mixed-grid{grid-template-columns:1fr}
+  .cmp-head,.cmp-row{grid-template-columns:100px 1fr 1fr}
+  .hero-title{font-size:28px}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav>
+  <div class="nav-logo">Investiga<span>Lab</span></div>
+  <ul class="nav-links">
+    <li><a href="#intro">Conceptos</a></li>
+    <li><a href="#cuantitativo">Cuantitativo</a></li>
+    <li><a href="#cualitativo">Cualitativo</a></li>
+    <li><a href="#instrumentos">Instrumentos</a></li>
+    <li><a href="#articulos">Artículos</a></li>
+  </ul>
+  <span class="nav-tag">Blog Académico</span>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-deco"></div>
+  <div class="hero-deco2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow animate d1">▸ Metodología de la Investigación</div>
+    <h1 class="hero-title animate d2">Diseños de <em>Investigación Científica</em></h1>
+    <p class="hero-sub animate d3">Una guía completa sobre los principales enfoques, diseños, técnicas e instrumentos de investigación cuantitativa, cualitativa y mixta, con ejemplos de artículos publicados en bases de datos académicas.</p>
+    <div class="hero-meta animate d4">
+      <span class="hero-chip"><span class="hero-dot"></span>Adrián López Pérez</span>
+      <span class="hero-chip"><span class="hero-dot"></span>Metodología de la Investigación · 2026</span>
+      <span class="hero-chip"><span class="hero-dot"></span>Medellín, Colombia</span>
+    </div>
+  </div>
+  <div class="scroll-hint">↓ explorar</div>
+</header>
+
+<!-- ═══════ INTRO ═══════ -->
+<section class="section" id="intro">
+  <div class="container">
+    <div class="sec-eyebrow">I · Fundamentos conceptuales</div>
+    <h2 class="sec-title">¿Qué es el diseño de investigación?</h2>
+    <p class="sec-lead">El diseño de investigación es la estrategia general que establece el investigador para dar respuesta a su pregunta de investigación. Define el plan, la estructura y la ruta metodológica que articula todos los componentes del proceso investigativo.</p>
+
+    <div class="callout" style="margin-top:28px">
+      <p class="callout-text">"El diseño de investigación proporciona el plan o la estrategia concebida para obtener la información que se requiere. El diseño señala al investigador lo que debe hacer para alcanzar sus objetivos de estudio, contestar las preguntas que se ha planteado y <strong>analizar la certeza de las hipótesis formuladas</strong> en un contexto particular."</p>
+      <p class="callout-source">Hernández-Sampieri, R., y Mendoza Torres, C. P. (2018). Metodología de la investigación. McGraw-Hill.</p>
+    </div>
+
+    <div class="intro-grid">
+      <div class="intro-card ic-navy">
+        <div class="ic-num">1</div>
+        <div class="ic-icon">🔢</div>
+        <div class="ic-title">Enfoque Cuantitativo</div>
+        <div class="ic-desc">Utiliza la recolección de datos para probar hipótesis, con base en la medición numérica y el análisis estadístico. Busca establecer patrones de comportamiento y probar teorías generalizables.</div>
+      </div>
+      <div class="intro-card ic-gold">
+        <div class="ic-num">2</div>
+        <div class="ic-icon">🔍</div>
+        <div class="ic-title">Enfoque Cualitativo</div>
+        <div class="ic-desc">Utiliza la recolección de datos sin medición numérica para descubrir o afinar preguntas de investigación. Busca comprender fenómenos explorándolos desde la perspectiva de los participantes.</div>
+      </div>
+      <div class="intro-card ic-teal">
+        <div class="ic-num">3</div>
+        <div class="ic-icon">⚗️</div>
+        <div class="ic-title">Enfoque Mixto</div>
+        <div class="ic-desc">Integra los enfoques cuantitativo y cualitativo en un mismo estudio. Permite una comprensión más completa y profunda del fenómeno investigado al combinar ambas lógicas.</div>
+      </div>
+    </div>
+
+    <!-- Process timeline -->
+    <div style="margin-top:44px">
+      <div class="sec-eyebrow">Proceso general de investigación</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-phase">Fase 1 · Planificación</div>
+          <div class="tl-title">Selección del tema, planteamiento del problema y objetivos</div>
+          <div class="tl-desc">Identificación del área de interés, formulación de la pregunta de investigación, definición de objetivos y justificación del estudio.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-phase">Fase 2 · Marco teórico</div>
+          <div class="tl-title">Revisión de literatura e hipótesis</div>
+          <div class="tl-desc">Construcción del sustento teórico-conceptual a partir de la revisión sistemática de antecedentes investigativos y formulación de hipótesis o supuestos.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-phase">Fase 3 · Metodología</div>
+          <div class="tl-title">Diseño metodológico y recolección de datos</div>
+          <div class="tl-desc">Selección del diseño específico, población y muestra, elección y aplicación de instrumentos y técnicas de recolección de información.</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-phase">Fase 4 · Análisis</div>
+          <div class="tl-title">Procesamiento, análisis e interpretación</div>
+          <div class="tl-desc">Organización, codificación y análisis de los datos mediante métodos estadísticos (cuantitativo) o hermenéutico-interpretativos (cualitativo).</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--teal)"></div>
+          <div class="tl-phase">Fase 5 · Resultados</div>
+          <div class="tl-title">Conclusiones y divulgación</div>
+          <div class="tl-desc">Síntesis de hallazgos, discusión, conclusiones, recomendaciones y comunicación de resultados en formatos académicos e institucionales.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CUANTITATIVO ═══════ -->
+<section class="section section-alt" id="cuantitativo">
+  <div class="container">
+    <div class="sec-eyebrow">II · Enfoque cuantitativo</div>
+    <h2 class="sec-title">Diseños de Investigación Cuantitativa</h2>
+    <p class="sec-lead">Los diseños cuantitativos se caracterizan por la medición objetiva de variables, el uso de muestras representativas y el análisis estadístico para establecer relaciones, diferencias o causalidades entre fenómenos.</p>
+
+    <div class="quant-header" style="margin-top:28px">
+      <div class="quant-label">Paradigma positivista / neopositivista</div>
+      <div class="quant-title">Investigación Cuantitativa</div>
+      <div class="quant-desc">Utiliza datos numéricos y estadísticamente procesables. Las hipótesis se formulan a priori, el diseño es rígido y predefinido, la muestra es probabilística y representativa, y busca la generalización de resultados a una población amplia. El investigador mantiene una posición distante y neutral respecto al objeto de estudio.</div>
+    </div>
+
+    <div class="design-grid">
+      <div class="design-card">
+        <span class="dc-badge badge-q">Experimental</span>
+        <div class="dc-title">Diseño Experimental Puro</div>
+        <div class="dc-def">Manipula variables independientes de manera intencional y mide sus efectos sobre variables dependientes. Requiere asignación aleatoria de participantes a grupos (experimental y control).</div>
+        <div class="dc-example-label">Ejemplo de aplicación</div>
+        <div class="dc-example">Ensayo clínico aleatorizado para evaluar la efectividad de una intervención educativa en enfermería sobre el control glucémico en pacientes con diabetes tipo 2.</div>
+      </div>
+      <div class="design-card">
+        <span class="dc-badge badge-q">Cuasiexperimental</span>
+        <div class="dc-title">Diseño Cuasiexperimental</div>
+        <div class="dc-def">Similar al experimental pero sin asignación aleatoria de los grupos. Los grupos preexisten naturalmente. Controla algunas variables pero no todas las posibles fuentes de invalidez interna.</div>
+        <div class="dc-example-label">Ejemplo de aplicación</div>
+        <div class="dc-example">Comparación del nivel de conocimientos antes y después de un programa de salud en una institución educativa, sin grupo control aleatorizado.</div>
+      </div>
+      <div class="design-card">
+        <span class="dc-badge badge-j">No experimental transversal</span>
+        <div class="dc-title">Diseño Transversal / Transeccional</div>
+        <div class="dc-def">Recolecta datos en un solo momento en el tiempo. No manipula variables. Puede ser descriptivo (caracteriza el fenómeno) o correlacional (establece relaciones entre variables).</div>
+        <div class="dc-example-label">Ejemplo de aplicación</div>
+        <div class="dc-example">Estudio de prevalencia de hipertensión arterial en adultos mayores de una comuna de Medellín en un período de tiempo específico.</div>
+      </div>
+      <div class="design-card">
+        <span class="dc-badge badge-m">Longitudinal</span>
+        <div class="dc-title">Diseño Longitudinal</div>
+        <div class="dc-def">Recolecta datos en múltiples momentos a lo largo del tiempo para analizar cambios, evoluciones o tendencias. Incluye subtipos: de tendencia, panel y evolutivo (de cohortes).</div>
+        <div class="dc-example-label">Ejemplo de aplicación</div>
+        <div class="dc-example">Seguimiento de cohorte de trabajadores de la salud para analizar la evolución del síndrome de burnout durante 3 años de ejercicio profesional.</div>
+      </div>
+    </div>
+
+    <!-- Comparison table -->
+    <div class="sec-eyebrow" style="margin-top:32px">Comparación entre diseños cuantitativos y cualitativos</div>
+    <div class="cmp-wrap">
+      <div class="cmp-head">
+        <div class="ch-asp">Aspecto</div>
+        <div class="ch-q">■ Cuantitativo</div>
+        <div class="ch-c">■ Cualitativo</div>
+      </div>
+      <div class="cmp-row"><div class="c-asp">Naturaleza de datos</div><div class="c-q">Numéricos, medibles, estadísticos</div><div class="c-c">Textuales, narrativos, simbólicos</div></div>
+      <div class="cmp-row"><div class="c-asp">Hipótesis</div><div class="c-q">Formuladas a priori, verificadas</div><div class="c-c">Emergentes o no formuladas</div></div>
+      <div class="cmp-row"><div class="c-asp">Muestra</div><div class="c-q">Probabilística y representativa</div><div class="c-c">Intencional, pequeña, teórica</div></div>
+      <div class="cmp-row"><div class="c-asp">Diseño</div><div class="c-q">Rígido y predefinido</div><div class="c-c">Flexible y emergente</div></div>
+      <div class="cmp-row"><div class="c-asp">Análisis</div><div class="c-q">Estadístico: descriptivo e inferencial</div><div class="c-c">Hermenéutico, fenomenológico</div></div>
+      <div class="cmp-row"><div class="c-asp">Generalización</div><div class="c-q">Alta: válida para la población</div><div class="c-c">Limitada; busca transferibilidad</div></div>
+      <div class="cmp-row"><div class="c-asp">Rol investigador</div><div class="c-q">Distante y neutral</div><div class="c-c">Parte activa del proceso</div></div>
+      <div class="cmp-row"><div class="c-asp">Paradigma base</div><div class="c-q">Positivista / neopositivista</div><div class="c-c">Interpretativo / constructivista</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ CUALITATIVO ═══════ -->
+<section class="section" id="cualitativo">
+  <div class="container">
+    <div class="sec-eyebrow">III · Enfoque cualitativo</div>
+    <h2 class="sec-title">Diseños de Investigación Cualitativa</h2>
+    <p class="sec-lead">Los diseños cualitativos buscan comprender los significados, experiencias y perspectivas de los sujetos en su contexto natural, desde un paradigma interpretativo y constructivista.</p>
+
+    <div class="qual-header" style="margin-top:28px">
+      <div class="quant-label" style="color:rgba(255,255,255,0.45)">Paradigma interpretativo / constructivista / crítico</div>
+      <div class="qual-title">Investigación Cualitativa</div>
+      <div class="qual-desc">Trabaja con datos textuales, narrativos y simbólicos. El diseño es flexible y emergente, la muestra es intencional y pequeña, y el investigador es parte activa del proceso, reconociendo el valor de la subjetividad. Busca transferibilidad al contexto más que generalización estadística.</div>
+    </div>
+
+    <div class="design-grid">
+      <div class="design-card">
+        <span class="dc-badge badge-c">Fenomenológico</span>
+        <div class="dc-title">Diseño Fenomenológico</div>
+        <div class="dc-def">Explora, describe e interpreta las experiencias vividas de los participantes sobre un fenómeno para determinar sus elementos esenciales. Utiliza la epojé (suspensión de juicios previos).</div>
+        <div class="dc-example-label">Ejemplo de aplicación</div>
+        <div class="dc-example">Experiencia vivida del personal de enfermería durante la pandemia COVID-19: significados, emociones y estrategias de afrontamiento.</div>
+      </div>
+      <div class="design-card">
+        <span class="dc-badge badge-c">Etnográfico</span>
+        <div class="dc-title">Diseño Etnográfico</div>
+        <div class="dc-def">Describe y analiza ideas, creencias, conocimientos y prácticas de grupos, culturas y comunidades. Implica inmersión prolongada del investigador en el campo de estudio.</div>
+        <div class="dc-example-label">Ejemplo de aplicación</div>
+        <div class="dc-example">Prácticas culturales de cuidado en salud materno-infantil en comunidades indígenas del Chocó, Colombia.</div>
+      </div>
+      <div class="design-card">
+        <span class="dc-badge badge-c">Teoría fundamentada</span>
+        <div class="dc-title">Teoría Fundamentada (Grounded Theory)</div>
+        <div class="dc-def">Genera teoría a partir de los datos mediante muestreo teórico, codificación abierta, axial y selectiva. El investigador recoge y analiza datos de forma simultánea hasta la saturación teórica.</div>
+        <div class="dc-example-label">Ejemplo de aplicación</div>
+        <div class="dc-example">Construcción teórica sobre los procesos de toma de decisiones de familias frente al diagnóstico de enfermedad crónica de un familiar.</div>
+      </div>
+      <div class="design-card">
+        <span class="dc-badge badge-c">IAP</span>
+        <div class="dc-title">Investigación Acción Participante (IAP)</div>
+        <div class="dc-def">Busca resolver un problema real de una comunidad. Los participantes son investigadores activos. Ciclo: diagnóstico → planificación → acción → observación → reflexión.</div>
+        <div class="dc-example-label">Ejemplo de aplicación</div>
+        <div class="dc-example">Diseño participativo de estrategias comunitarias de prevención de dengue en comunas vulnerables de Medellín con participación de líderes comunitarios.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ MIXED ═══════ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="sec-eyebrow">IV · Enfoque mixto</div>
+    <h2 class="sec-title">Diseños de Métodos Mixtos</h2>
+    <p class="sec-lead">Los diseños mixtos integran datos cuantitativos y cualitativos para lograr una comprensión más completa del fenómeno. Su uso ha crecido significativamente en las ciencias de la salud y sociales.</p>
+    <div class="mixed-grid">
+      <div class="mixed-card">
+        <div class="mc-icon">⇄</div>
+        <div class="mc-title">Diseño Convergente</div>
+        <div class="mc-desc">Se recogen datos cuantitativos y cualitativos simultáneamente, se analizan por separado y luego se integran para comparar y contrastar los hallazgos.</div>
+        <span class="mc-tag">Paralelo</span>
+      </div>
+      <div class="mixed-card">
+        <div class="mc-icon">→</div>
+        <div class="mc-title">Secuencial Explicativo</div>
+        <div class="mc-desc">Primero se recolectan y analizan datos cuantitativos, y luego los cualitativos sirven para explicar en profundidad los resultados cuantitativos obtenidos.</div>
+        <span class="mc-tag">CUAN → cual</span>
+      </div>
+      <div class="mixed-card">
+        <div class="mc-icon">⤷</div>
+        <div class="mc-title">Secuencial Exploratorio</div>
+        <div class="mc-desc">Se comienza con datos cualitativos para explorar el fenómeno, y los resultados guían la construcción de instrumentos cuantitativos que se aplican posteriormente.</div>
+        <span class="mc-tag">cual → CUAN</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ INSTRUMENTS ═══════ -->
+<section class="section" id="instrumentos">
+  <div class="container">
+    <div class="sec-eyebrow">V · Técnicas e instrumentos</div>
+    <h2 class="sec-title">Técnicas e Instrumentos de Recolección de Datos</h2>
+    <p class="sec-lead">La elección de técnicas e instrumentos depende directamente del enfoque y diseño seleccionado. Cada instrumento debe cumplir criterios de validez y confiabilidad para garantizar el rigor investigativo.</p>
+
+    <div class="inst-grid">
+      <div class="inst-card">
+        <div class="inst-head inst-head-q">
+          <div class="inst-head-label">Enfoque cuantitativo</div>
+          <div class="inst-head-title">Técnicas e Instrumentos Cuantitativos</div>
+        </div>
+        <div class="inst-body">
+          <div class="inst-item">
+            <div class="inst-icon">📋</div>
+            <div>
+              <div class="inst-name">Encuesta / Cuestionario</div>
+              <div class="inst-desc">Conjunto estructurado de preguntas cerradas administradas a una muestra. Instrumento más utilizado en investigación cuantitativa descriptiva y correlacional.</div>
+              <div class="inst-example">Ej: Escala de Calidad de Vida SF-36 aplicada a pacientes con ERC.</div>
+            </div>
+          </div>
+          <div class="inst-item">
+            <div class="inst-icon">📏</div>
+            <div>
+              <div class="inst-name">Escalas de medición</div>
+              <div class="inst-desc">Instrumentos estandarizados con validez y confiabilidad probada. Tipos: Likert, Guttman, diferencial semántico, visual analógica.</div>
+              <div class="inst-example">Ej: Escala de Ansiedad de Hamilton (HAM-A) en estudios de salud mental.</div>
+            </div>
+          </div>
+          <div class="inst-item">
+            <div class="inst-icon">🧪</div>
+            <div>
+              <div class="inst-name">Pruebas / Tests estandarizados</div>
+              <div class="inst-desc">Instrumentos sometidos a procesos de validación psicométrica en poblaciones con distribución normal. Miden constructos específicos con criterios de confiabilidad.</div>
+              <div class="inst-example">Ej: Mini-Examen del Estado Mental (MoCA) para evaluación cognitiva.</div>
+            </div>
+          </div>
+          <div class="inst-item">
+            <div class="inst-icon">🔬</div>
+            <div>
+              <div class="inst-name">Fichas de observación estructurada</div>
+              <div class="inst-desc">Registro sistemático y estandarizado de comportamientos o eventos observables con categorías predefinidas y criterios de frecuencia o duración.</div>
+              <div class="inst-example">Ej: Lista de verificación de adherencia al protocolo de lavado de manos.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="inst-card">
+        <div class="inst-head inst-head-c">
+          <div class="inst-head-label">Enfoque cualitativo</div>
+          <div class="inst-head-title">Técnicas e Instrumentos Cualitativos</div>
+        </div>
+        <div class="inst-body">
+          <div class="inst-item">
+            <div class="inst-icon">🎙️</div>
+            <div>
+              <div class="inst-name">Entrevista en profundidad</div>
+              <div class="inst-desc">Conversación abierta o semiestructurada entre investigador y participante. Permite explorar significados, experiencias y perspectivas de manera flexible y emergente.</div>
+              <div class="inst-example">Ej: Entrevista a cuidadores sobre el significado del cuidado domiciliario en enfermedades crónicas.</div>
+            </div>
+          </div>
+          <div class="inst-item">
+            <div class="inst-icon">👥</div>
+            <div>
+              <div class="inst-name">Grupo focal</div>
+              <div class="inst-desc">Técnica grupal que permite explorar percepciones, creencias y actitudes colectivas. Genera datos a través de la interacción entre 6 a 12 participantes.</div>
+              <div class="inst-example">Ej: Grupo focal con comunidad LGBTIQ+ sobre barreras de acceso a servicios de salud.</div>
+            </div>
+          </div>
+          <div class="inst-item">
+            <div class="inst-icon">👁️</div>
+            <div>
+              <div class="inst-name">Observación participante</div>
+              <div class="inst-desc">El investigador se integra al contexto estudiado para observar fenómenos desde adentro. Registro en diario de campo con notas descriptivas, analíticas y personales.</div>
+              <div class="inst-example">Ej: Observación de prácticas de cuidado cultural en comunidades afrocolombianas del Pacífico.</div>
+            </div>
+          </div>
+          <div class="inst-item">
+            <div class="inst-icon">📄</div>
+            <div>
+              <div class="inst-name">Análisis documental</div>
+              <div class="inst-desc">Revisión e interpretación sistemática de documentos primarios y secundarios. Incluye historias de vida, relatos autobiográficos, registros institucionales y fuentes hemerográficas.</div>
+              <div class="inst-example">Ej: Análisis de narrativas de pacientes sobre su experiencia con el sistema de salud.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ ARTICLES ═══════ -->
+<section class="section section-alt" id="articulos">
+  <div class="container">
+    <div class="sec-eyebrow">VI · Ejemplos de investigaciones publicadas (2016-2026)</div>
+    <h2 class="sec-title">Artículos en Bases de Datos Académicas</h2>
+    <p class="sec-lead">Los siguientes artículos ilustran la aplicación de distintos diseños de investigación cuantitativos, cualitativos y mixtos en el campo de la salud y las ciencias sociales, publicados en revistas indexadas durante los últimos diez años.</p>
+
+    <!-- Quantitative examples -->
+    <div class="sec-eyebrow" style="margin-top:32px;color:var(--rust)">Investigaciones con diseño cuantitativo</div>
+
+    <div class="article-card">
+      <div class="art-year">2023</div>
+      <div>
+        <span class="art-type at-q">Cuantitativo · Correlacional transversal</span>
+        <div class="art-title">Barreras de acceso al sistema de salud en poblaciones urbanas vulnerables de Colombia: prevalencia y factores asociados</div>
+        <div class="art-authors">Rodríguez-Gómez, R. et al. (2023) · Biomédica, Instituto Nacional de Salud · DOI: 10.7705/biomedica.6476</div>
+        <div class="art-abstract">Estudio transversal de base poblacional que analizó la prevalencia de barreras de acceso al sistema de salud y sus factores asociados en comunas urbanas de Colombia. Se aplicó un cuestionario estructurado a 1.240 participantes. Los resultados mostraron que el 21.38% de la población no accedió a los servicios de salud pese a tener necesidad, con mayor prevalencia en no afiliados y en comunas de estratos 1 y 2.</div>
+        <div class="art-db">Instrumento: Cuestionario estructurado · Análisis estadístico bivariado y regresión logística · PubMed / SciELO Colombia</div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="art-year">2022</div>
+      <div>
+        <span class="art-type at-q">Cuantitativo · Cuasiexperimental</span>
+        <div class="art-title">Efectividad de una intervención educativa en enfermería sobre el autocuidado en pacientes con diabetes mellitus tipo 2</div>
+        <div class="art-authors">García-Villar, C., et al. (2022) · Revista Española de Salud Pública · Vol. 96, e202210092</div>
+        <div class="art-abstract">Diseño cuasiexperimental antes-después sin grupo control en 120 pacientes con DM2. Se aplicó el cuestionario Summary of Diabetes Self-Care Activities (SDSCA) validado en español, antes y tres meses después de una intervención educativa estructurada por enfermería. Los resultados evidenciaron mejoras estadísticamente significativas (p &lt; 0.01) en todos los dominios de autocuidado evaluados.</div>
+        <div class="art-db">Instrumento: SDSCA + HbA1c · Análisis de varianza de medidas repetidas · PubMed / Dialnet</div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="art-year">2021</div>
+      <div>
+        <span class="art-type at-q">Cuantitativo · Descriptivo transversal</span>
+        <div class="art-title">Prevalencia del síndrome de burnout en profesionales de enfermería durante la pandemia COVID-19 en Colombia</div>
+        <div class="art-authors">Bernal-Torres, M., et al. (2021) · Aquichan · Vol. 21, N° 3. DOI: 10.5294/aqui.2021.21.3.5</div>
+        <div class="art-abstract">Estudio descriptivo transversal en 385 enfermeros colombianos durante la pandemia. Se aplicó el Inventario de Burnout de Maslach (MBI) y una encuesta sociodemográfica. Se encontró agotamiento emocional alto en el 62.3% de los participantes, despersonalización elevada en el 48.1% y baja realización personal en el 55.2%. El contexto de la emergencia sanitaria correlacionó significativamente con los tres componentes del burnout.</div>
+        <div class="art-db">Instrumento: MBI + encuesta sociodemográfica · Estadística descriptiva e inferencial · SciELO / Redalyc</div>
+      </div>
+    </div>
+
+    <!-- Qualitative examples -->
+    <div class="sec-eyebrow" style="margin-top:32px;color:var(--teal)">Investigaciones con diseño cualitativo</div>
+
+    <div class="article-card">
+      <div class="art-year">2023</div>
+      <div>
+        <span class="art-type at-c">Cualitativo · Fenomenológico</span>
+        <div class="art-title">Vivencias y significados del cuidado de enfermería desde la perspectiva de pacientes hospitalizados en UCI</div>
+        <div class="art-authors">Múnera-Gaviria, H. A., et al. (2023) · Enfermería Global · Vol. 22, N° 71. DOI: 10.6018/eglobal.536461</div>
+        <div class="art-abstract">Estudio fenomenológico hermenéutico que exploró los significados del cuidado de enfermería en 14 pacientes egresados de UCI en Medellín. La recolección de datos se realizó mediante entrevistas en profundidad y se analizaron con el método de Colaizzi. Emergieron cuatro categorías esenciales: presencia significativa, comunicación terapéutica, humanización del cuidado y seguridad percibida.</div>
+        <div class="art-db">Técnica: Entrevista en profundidad · Análisis fenomenológico (Colaizzi) · SciELO / Dialnet</div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="art-year">2022</div>
+      <div>
+        <span class="art-type at-c">Cualitativo · Investigación Acción Participante</span>
+        <div class="art-title">Construcción participativa de estrategias comunitarias de prevención del dengue en comunas de Cali, Colombia</div>
+        <div class="art-authors">Velásquez-Ochoa, L., et al. (2022) · Cadernos de Saúde Pública · Vol. 38, N° 5. DOI: 10.1590/0102-311X00180821</div>
+        <div class="art-abstract">Investigación acción participante desarrollada durante 18 meses con líderes comunitarios, agentes de salud y habitantes de tres comunas de Cali. Se utilizaron grupos focales, entrevistas semiestructuradas y talleres participativos para el diagnóstico y la co-construcción de estrategias preventivas. Los participantes diseñaron e implementaron 12 acciones comunitarias adaptadas al contexto cultural local.</div>
+        <div class="art-db">Técnicas: Grupos focales + Observación participante + Talleres · PubMed / SciELO Brasil</div>
+      </div>
+    </div>
+
+    <div class="article-card">
+      <div class="art-year">2020</div>
+      <div>
+        <span class="art-type at-c">Cualitativo · Etnográfico</span>
+        <div class="art-title">Prácticas culturales de cuidado en salud materna en comunidades afrocolombianas del Pacífico: un enfoque etnográfico</div>
+        <div class="art-authors">Palacios-Moya, L., et al. (2020) · Colombia Médica · Vol. 51, N° 4. DOI: 10.25100/cm.v51i4.4349</div>
+        <div class="art-abstract">Diseño etnográfico con 24 meses de trabajo de campo en tres comunidades afrocolombianas del Pacífico. Se realizaron 32 entrevistas en profundidad, observación participante prolongada y análisis de documentos históricos. Se identificaron saberes ancestrales, prácticas rituales y redes de apoyo comunitario que median el proceso de gestación, parto y puerperio, constituyéndose en recursos culturales de cuidado reconocidos por las parteras tradicionales.</div>
+        <div class="art-db">Técnicas: Observación participante + Entrevistas · Análisis temático inductivo · SciELO Colombia / Redalyc</div>
+      </div>
+    </div>
+
+    <!-- Mixed methods -->
+    <div class="sec-eyebrow" style="margin-top:32px;color:#5a3090">Investigaciones con diseño mixto</div>
+
+    <div class="article-card">
+      <div class="art-year">2024</div>
+      <div>
+        <span class="art-type at-m">Mixto · Convergente paralelo</span>
+        <div class="art-title">Determinantes sociales y barreras de acceso al sistema de salud en adultos mayores de Medellín: un estudio de métodos mixtos</div>
+        <div class="art-authors">Zuluaga-Holguín, P., et al. (2024) · Gaceta Sanitaria · Vol. 38, e102345. DOI: 10.1016/j.gaceta.2024.102345</div>
+        <div class="art-abstract">Diseño mixto convergente que combinó un estudio transversal con encuesta a 680 adultos mayores (componente cuantitativo) y 20 entrevistas en profundidad (componente cualitativo) en comunas priorizadas de Medellín. La integración de datos permitió identificar que las barreras económicas y administrativas cuantificadas estadísticamente se articulan con experiencias subjetivas de discriminación y deshumanización en la atención, visibles solo mediante el componente cualitativo.</div>
+        <div class="art-db">Instrumentos: Cuestionario + Entrevistas en profundidad · MEDLINE / SciELO España</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer>
+  <div class="footer-logo">InvestigaLab</div>
+  <p class="footer-sub">Blog académico sobre diseños de investigación científica<br>Módulo: Metodología de la Investigación · Universidad · 2026</p>
+  <div class="footer-author">✍️ Elaborado por Adrián López Pérez</div>
+
+  <div class="footer-refs">
+    <div class="fr-title">Referencias bibliográficas — APA 7.ª edición</div>
+    <div class="fr-item"><strong>Hernández-Sampieri, R., y Mendoza Torres, C. P. (2018).</strong> <em>Metodología de la investigación: Las rutas cuantitativa, cualitativa y mixta.</em> McGraw-Hill Interamericana.</div>
+    <div class="fr-item"><strong>Niño Rojas, V. M. (2019).</strong> Capítulo segundo: Las bases para el diseño de una investigación. En <em>Metodología de la investigación</em> (2.ª ed., pp. 41-68). Ediciones de la U.</div>
+    <div class="fr-item"><strong>Pimienta Prieto, J., De la Orden Hoz, A., y Estrada Coronado, R. M. (2018).</strong> Bloque 2: Protocolo y diseño de la metodología de la investigación. En <em>Metodología de la Investigación</em> (pp. 44-89). Pearson.</div>
+    <div class="fr-item"><strong>Creswell, J. W., y Creswell, J. D. (2018).</strong> <em>Research design: Qualitative, quantitative, and mixed methods approaches</em> (5.ª ed.). SAGE Publications.</div>
+    <div class="fr-item"><strong>Rodríguez-Gómez, R. (2023).</strong> Investigaciones cualitativas en salud pública publicadas en revistas biomédicas colombianas 2011-2021. <em>Biomédica, 43</em>(2). https://doi.org/10.7705/biomedica.6476</div>
+    <div class="fr-item"><strong>Bernal-Torres, M. et al. (2021).</strong> Burnout en enfermería durante COVID-19. <em>Aquichan, 21</em>(3). https://doi.org/10.5294/aqui.2021.21.3.5</div>
+    <div class="fr-item"><strong>Palacios-Moya, L. et al. (2020).</strong> Prácticas culturales de cuidado en salud materna en comunidades afrocolombianas. <em>Colombia Médica, 51</em>(4). https://doi.org/10.25100/cm.v51i4.4349</div>
+  </div>
+  <p class="footer-copy">© 2026 Adrián López Pérez · Blog académico de elaboración propia · Todos los derechos reservados</p>
+</footer>
+
+</body>
+</html>
